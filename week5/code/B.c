@@ -18,8 +18,8 @@
 int arr[10000];
 int main() {
     int n;
-    freopen("B.in", "r", stdin);
-    freopen("B.out", "w", stdout);
+    freopen("B.in_v2", "r", stdin);
+    freopen("B.out_v2", "w", stdout);
     while (scanf("%d", &n) == 1) {
         int i, j;
         for (i = 0; i < n; ++i) {

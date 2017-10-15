@@ -11,14 +11,17 @@ A、
 样例输入：
 3 1 2 3
 4 1 1 2 3
+0
 样例输出：
 0 2
 1 3
 
 冒泡排序
 B、
-HDU2689
-
+You want to processe a sequence of n distinct integers by swapping two adjacent sequence elements until the sequence is sorted in ascending order. Then how many times it need. 
+For example, 1 2 3 5 4, we only need one operation : swap 5 and 4. 
+The input consists of a number of test cases. Each case consists of two lines: the first line contains a positive integer n (n <= 1000); the next line contains a permutation of the n integers from 1 to n.
+For each case, output the minimum times need to sort it in ascending order on a single line.
 C、
 描述：
 对于冒泡排序，输出最少需要几趟就可以将数组有序。比如对于数组1 3 4 2，经过第一趟排序之后是1 3 2 4，
@@ -56,3 +59,12 @@ D、
 
 E、绝对值排序
 HDU 2020
+输入n(n<=100)个整数，按照绝对值从大到小排序后输出。题目保证对于每一个测试实例，所有的数的绝对值都不相等。
+输入数据有多组，每组占一行，每行的第一个数字为n,接着是n个整数，n=0表示输入数据的结束，不做处理。
+对于每个测试实例，输出排序后的结果，两个数之间用一个空格隔开。每个测试实例占一行。
+3 3 -4 2
+4 0 1 2 -3
+0
+
+-4 3 2
+-3 2 1 0
