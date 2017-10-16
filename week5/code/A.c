@@ -15,16 +15,10 @@
 
 #include <stdio.h>
 
-
-// #define LOCAL
 int arr[1001];
 
 int main() {
     int n;
-#ifdef LOCAL
-    freopen("A.in", "r", stdin);
-    freopen("A.out", "w", stdout);
-#endif
     while (scanf("%d", &n) == 1 && n) {
         int i;
         for (i = 0; i < n; ++i) {

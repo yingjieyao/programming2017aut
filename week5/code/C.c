@@ -17,16 +17,10 @@
 int arr[1000];
 int main() {
     int n;
-    freopen("C.in", "r", stdin);
-    freopen("C.out", "w", stdout);
     while (scanf("%d", &n) == 1) {
         int i, j;
         for (i = 0; i < n; ++i) scanf("%d", &arr[i]);
         int ans = 0;
-        if (n == 1) {
-            puts("0");
-            continue;
-        }
         for (i = 0; i < n; ++i) {
             int flag = 0;
             ans++;

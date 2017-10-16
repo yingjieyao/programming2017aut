@@ -14,10 +14,7 @@
 
 
 #include <stdio.h>
-
-int abs(int n) {
-    return n > 0 ? n : -n;
-}
+#include <math.h>
 
 void bubble_sort(int arr[], int n) {
     int i, j, tmp;
@@ -32,12 +29,9 @@ void bubble_sort(int arr[], int n) {
     }
 }
 
-
 int main() {
     int n;
     int arr[111];
-    freopen("E.in_v2", "r", stdin);
-    freopen("E.out_v2", "w", stdout);
     while (scanf("%d", &n) == 1 && n) {
         int i;
         for (i = 0; i < n; ++i) {
