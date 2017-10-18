@@ -33,7 +33,7 @@ void quicksort(int arr[], int beg, int ed) {
     quicksort(arr, left + 1, ed);
 }
 
-void pubble(int arr[], int n) {
+void bubble(int arr[], int n) {
     int k = n - 1, pos;
     for (int i = 0; i < n; ++i) {
         int fl = 0;
@@ -52,6 +52,7 @@ void pubble(int arr[], int n) {
         puts("");
     }
 }
+
 void insert(int arr[], int n) {
     for (int i = 0; i < n; ++i) {
         for (int j = i - 1; j >= 0; --j) {
