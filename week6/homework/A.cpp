@@ -15,6 +15,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <assert.h>
+#include <algorithm>
+
+using namespace std;
 
 int k, ans;
 void quick_sort(int arr[], int beg, int ed) {
@@ -39,11 +42,6 @@ void quick_sort(int arr[], int beg, int ed) {
         }
     }
     arr[left] = tmp;
-//     printf("left %d, tmp %d\n", left, tmp);
-//     for (int i = 0; i <= ed; ++i) {
-//         printf("%d ", arr[i]);
-//     }
-//     puts("");
     if (left == k) {
         ans = tmp;
     } else if (left > k) {
@@ -53,19 +51,33 @@ void quick_sort(int arr[], int beg, int ed) {
     }
 }
 
+int read()
+{
+    int n = 0;
+    char a = getchar();
+    bool flag = 0;
+    while(a > '9' || a < '0') { if(a == '-') flag = 1; a = getchar(); }
+    while(a <= '9' && a >= '0') n = n * 10 + a - '0',a = getchar();
+    if(flag) n = -n;
+    return n;
+}
 
-int arr[1000001];
+int arr[10000001];
 int main() {
     int n, i;
-//    freopen("A.in", "r", stdin);
-//    freopen("A.out", "w", stdout);
+    freopen("A_bk.in", "r", stdin);
+    freopen("A_bk.out", "w", stdout);
+    clock_t start = clock(), finish;
     while (scanf("%d %d", &n, &k) == 2) {
         ans = -1;
         k--;
-        for (i = 0; i < n; ++i) scanf("%d", &arr[i]);
+        for (i = 0; i < n; ++i) arr[i] = read();
+        //  nth_element(arr, arr + k - 1, arr + n);
+        // sort(arr, arr + n);
         quick_sort(arr, 0, n - 1);
-        printf("%d\n", ans);
+        printf("%d\n", arr[k]);
     }
-//    printf("%lf\n", (finish - start) * 1.0 / CLOCKS_PER_SEC);
+    finish = clock();
+    printf("%lf\n", (finish - start) * 1.0 / CLOCKS_PER_SEC);
     return 0;
 }
