@@ -26,7 +26,7 @@ int main() {
     cout << endl << endl;
     cout << "a, b,c , d e,,  fA \n   cc  cc cc ClhRClRC ," << endl;
 
-    cout << " 　" ;
+    cout << "   " ;
     for (int i = 0; i < 10000000; ++i) cout << char('a' + rand() % 26);
     cout << "    " << endl;
 
