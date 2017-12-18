@@ -19,11 +19,21 @@
 
 using namespace std;
 
-int k, ans;
+int getint() {
+    int r = 0; char t = 0;
+    while (t < '0' || t > '9')  {
+        if ((t = getchar()) == EOF) return EOF;
+    }
+    while (t >= '0' && t <= '9') {
+        r = r * 10 + t - '0';
+        t = getchar();
+    }
+    return r;
+}
+
+int k;
 void quick_sort(int arr[], int beg, int ed) {
-//    assert(beg <= ed);
     if (beg == ed) {
-        if (beg == k) ans = arr[beg];
         return;
     }
     int tmp = arr[beg];
@@ -43,7 +53,7 @@ void quick_sort(int arr[], int beg, int ed) {
     }
     arr[left] = tmp;
     if (left == k) {
-        ans = tmp;
+        return;
     } else if (left > k) {
         quick_sort(arr, beg, left - 1);
     } else {
@@ -65,12 +75,20 @@ int read()
 int arr[10000001];
 int main() {
     int n, i;
+<<<<<<< HEAD
+=======
     freopen("A_bk.in", "r", stdin);
     freopen("A_bk.out", "w", stdout);
     clock_t start = clock(), finish;
+>>>>>>> c3195a2015ec33f059af0d628c619b181bffc894
     while (scanf("%d %d", &n, &k) == 2) {
-        ans = -1;
         k--;
+<<<<<<< HEAD
+        for (i = 0; i < n; ++i) arr[i] = getint();
+        quick_sort(arr, 0, n - 1);
+        printf("%d\n", arr[k]);
+    }
+=======
         for (i = 0; i < n; ++i) arr[i] = read();
         //  nth_element(arr, arr + k - 1, arr + n);
         // sort(arr, arr + n);
@@ -79,5 +97,6 @@ int main() {
     }
     finish = clock();
     printf("%lf\n", (finish - start) * 1.0 / CLOCKS_PER_SEC);
+>>>>>>> c3195a2015ec33f059af0d628c619b181bffc894
     return 0;
 }
