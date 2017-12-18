@@ -1,0 +1,37 @@
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#define maxn 10010
+#define INF 100001
+double a[maxn];
+int n,k;
+
+bool dix(double x)
+{
+    int num=0,i;
+    for(i=0;i<n;++i)
+        num+=(int)(a[i]/x);
+    return num>=k;//满足条件是返回true，不满足返回false
+}
+
+int main()
+{
+    while(scanf("%d%d",&n,&k)!=EOF)
+    {
+        int i;
+        for(i=0;i<n;++i)
+            scanf("%lf",&a[i]);
+        double left=0,right=INF,mid;
+        i=1000;
+        while(i--)
+        {
+            mid=(left+right)/2;
+            if(dix(mid))
+                left=mid;
+            else
+                right=mid;
+        }
+        printf("%0.2f\n",floor(right*100)/100);//注意精度，可不明白%0.2lf输出为什么会错
+    }
+    return 0;
+}

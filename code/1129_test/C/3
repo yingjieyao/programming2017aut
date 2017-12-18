@@ -1,0 +1,59 @@
+#include<iostream>
+#include<map>
+#include<string>
+#include<cstring>
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<queue>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int a[10010];
+int dp1[10010];
+int dp2[10010];
+int main()
+{
+    int i,n,t;
+    vector<int>box;
+    while(cin>>n)
+    {
+        for(i=0;i<n;i++)
+            cin>>a[i];
+        box.clear();
+        for(i=0;i<n;i++)
+        {
+            if(box.empty()||a[i]>box.back())
+            {
+                box.push_back(a[i]);
+                dp1[i]=box.size();
+            }
+            else
+            {
+                t=lower_bound(box.begin(),box.end(),a[i])-box.begin();
+                box[t]=a[i];
+                dp1[i]=t+1;
+            }
+        }
+        box.clear();
+        for(i=n-1;i>-1;i--)
+        {
+            if(box.empty()||a[i]>box.back())
+            {
+                box.push_back(a[i]);
+                dp2[i]=box.size();
+            }
+            else
+            {
+                t=lower_bound(box.begin(),box.end(),a[i])-box.begin();
+                box[t]=a[i];
+                dp2[i]=t+1;
+            }
+        }
+        t=0;
+        for(i=0;i<n;i++)
+            t=max(t,min(dp1[i],dp2[i]));
+        cout<<t*2-1<<endl;
+    }
+    return 0;
+}

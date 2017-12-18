@@ -1,0 +1,76 @@
+#include <cstring>
+#include <cstdio>
+#include <queue>
+using namespace std;
+char map[31][31][31],cc;
+int s1,s2,s3,x,y,z,a,b,c,finde,sum,fla[31][31][31];
+struct node
+{
+    int x,y,z;
+};
+queue<node>S;
+node chan[6]={{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};
+int main()
+{
+    while(scanf("%d%d%d",&a,&b,&c)&&a&&b&&c)
+    {
+        getchar();//吃换行符
+        memset(fla,0,sizeof(fla));
+        memset(map,'#',sizeof(map));//数据清空
+        for(int i=0;i<a;i++)
+        {   for(int j=0;j<b;j++)
+            {   for(int k=0;k<c;k++)
+                {
+                    scanf("%c",&map[i][j][k]);//地图输入
+                    if(map[i][j][k]=='.'||map[i][j][k]=='E')
+                        fla[i][j][k]=-1;
+                    if(map[i][j][k]=='S')
+                    {
+                        s1=i;s2=j;s3=k;
+                    }
+                }getchar();
+            }getchar();
+        }
+        node thes;
+        thes.x=s1;thes.y=s2;thes.z=s3;
+        while(!S.empty())//队列清空
+        {
+            S.pop();
+        }
+        node count={-1,0,0};
+        S.push(count);
+        S.push(thes);
+        sum=-1;finde=0;
+        while(S.size()>1)//循环搜索出口
+        {
+            if(S.front().x == -1){ sum++; S.push(S.front()); S.pop(); }//层数标记
+            x = S.front().x; y = S.front().y; z = S.front().z;
+            if(map[x][y][z]=='E'){finde=1;break;}
+            node si;
+            for(int kk=0;kk<6;kk++)
+            {
+                if(fla[x+chan[kk].x][y+chan[kk].y][z+chan[kk].z]==-1)
+                {
+                    si.x=x+chan[kk].x;
+                    si.y=y+chan[kk].y;
+                    si.z=z+chan[kk].z;
+                    S.push(si);
+                    fla[x+chan[kk].x][y+chan[kk].y][z+chan[kk].z]=1;//一定要在这里标记它！不然就可能超时。
+                }
+            }
+            S.pop();
+        }
+        if(finde==1)
+        {
+            printf("Escaped in %d minute(s).\n",sum);
+        }
+        else
+            printf("Trapped!\n");
+    }
+    return 0;
+}
+
+作者：Gadore千里
+链接：http://www.jianshu.com/p/3ec8509c3473
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

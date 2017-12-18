@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<iostream>
+#include<queue>
+#include<string.h>
+using namespace std;
+char a[100][100][100];
+int b[100][100][1000];
+int l,n,m;
+int d[6][3]= {{0,1,0},{0,0,1},{0,-1,0},{0,0,-1},{-1,0,0},{1,0,0}};六个方向
+struct node
+{
+    int x,y,z,bu;
+} now,haha;
+int bfs(int x1,int y1,int z1,int step)
+{
+    queue<node>q;
+    now.x=x1;
+    now.y=y1;
+    now.z=z1;
+    b[x1][y1][z1]=1;
+    now.bu=step;
+    q.push(now);
+    while(!q.empty())
+    {
+        now=q.front();
+        q.pop();
+        for(int i=0; i<6; i++)
+        {
+            haha.x=now.x+d[i][0];
+            haha.y=now.y+d[i][1];
+            haha.z=now.z+d[i][2];
+            if(haha.x>=0&&haha.x<l&&haha.y>=0&&haha.y<n&&haha.z>=0&&haha.z<m&&b[haha.x][haha.y][haha.z]==0&&a[haha.x][haha.y][haha.z]!='#')
+            {
+                haha.bu=now.bu+1;
+                if(a[haha.x][haha.y][haha.z]=='E')
+                {
+                    return haha.bu;
+                }
+                b[haha.x][haha.y][haha.z]=1;
+                q.push(haha);
+            }
+        }
+    }
+    return -1;
+}
+int main()
+{
+    while(scanf("%d%d%d",&l,&n,&m)!=-1)
+    {
+        if(l==0&&n==0&&m==0)
+        {
+            break;
+        }
+        memset(b,0,sizeof(b));
+        int we,ni,ha;
+        for(int i=0; i<l; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                for(int k=0; k<m; k++)
+                {
+                    cin>>a[i][j][k];
+                    if(a[i][j][k]=='S')
+                    {
+                        we=i;
+                        ni=j;
+                        ha=k;
+                    }
+                }
+            }
+        }
+        int f;
+        f=bfs(we,ni,ha,0);
+        if(f==-1)
+        {
+            printf("Trapped!\n");
+
+        }
+        else
+        {
+            printf("Escaped in %d minute(s).\n",f);
+        }
+    }
+}

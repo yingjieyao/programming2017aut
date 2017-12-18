@@ -1,0 +1,81 @@
+
+#define maxn 31
+using namespace std;
+int L,R,C;
+int beginx,beginy,beginz,endx,endy,endz;
+bool found;
+int step_zou[6][3]={{0,0,1},{0,0,-1},{0,1,0},{0,-1,0},{1,0,0},{-1,0,0}};
+char dungeon[maxn][maxn][maxn];
+int vis[maxn][maxn][maxn];
+int step[maxn][maxn][maxn];
+int a[maxn*maxn*maxn*maxn];
+
+int bfs(int x,int y,int z){
+        int front=0,rear=0;
+      a[front++]=x*R*C+y*C+z;
+  step[x][y][z]=0;
+ vis[x][y][z]=1;
+  while(front>rear){
+                x=a[rear]/(R*C);
+         y=(a[rear]-x*R*C)/C;
+             z=a[rear]%C;
+             if(x==endx&&y==endy&&z==endz){
+                   found=true;
+                      return step[x][y][z];
+            }
+                for(int i=0;i<6;i++){
+                     int nx=x+step_zou[i][0];
+                 int ny=y+step_zou[i][1];
+                 int nz=z+step_zou[i][2];
+                 if(nx>=0&&ny>=0&&nz>=0&&nx
+                           vis[nx][ny][nz]=1;
+                               a[front++]=nx*R*C+ny*C+nz;
+                               step[nx][ny][nz]=step[x][y][z]+1;
+                        }
+                }
+                rear++;
+  }
+        return -1;
+}
+
+int main()
+{
+// freopen("test.txt","r",stdin);
+   while(cin>>L>>R>>C){
+           getchar();
+               if(0==L&&0==R&&0==C)break;
+               found=false;
+             memset(vis,0,sizeof(vis));
+               memset(step,0,sizeof(step));
+             for(int i=0;i
+                     for(int j=0;j
+                             cin>>dungeon[i][j];
+                        }
+                }
+                bool found1=false;
+               bool found2=false;
+               for(int i=0;i
+                     for(int j=0;j
+                                     for(int k=0;k
+                                             if(dungeon[i][j][k]=='S'){
+                                                       beginx=i;
+                                                        beginy=j;
+                                                        beginz=k;
+                                                        found1=true;
+                                             }else if(dungeon[i][j][k]=='E'){
+                                                 endx=i;
+                                                  endy=j;
+                                                  endz=k;
+                                                  found2=true;
+                                             }
+                                        }
+                                        if(found1&&found2)break;
+                 }
+                        if(found1&&found2)break;
+         }
+                int re=bfs(beginx,beginy,beginz);
+                if(found)cout<<"Escaped in "<<re<<" minute(s)."<<endl;
+           else cout<<"Trapped!"<<endl;
+ }
+        return 0;
+}

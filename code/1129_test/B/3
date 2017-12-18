@@ -1,0 +1,81 @@
+#include<iostream>
+#include<cstdio>
+#include<queue>
+#include<cstring>
+#include<string>
+using namespace std;
+char a[35][35][35];
+int  b[35][35][35];
+int L,R,C;
+int f[3][6]={{1,-1,0, 0,0, 0},
+          {0, 0,1,-1,0, 0},
+          {0, 0,0, 0,1,-1}};
+int s2[35][35][35];
+int flag;
+struct Knot
+{
+    int x,y,z;
+    int step;
+};
+Knot c,d;
+bool search1(int x,int y,int z)
+{
+    return (x>=1&&x<=L&&y>=1&&y<=R&&z>=1&&z<=C);
+}
+int bfs(int si,int sj,int sk)
+{
+    queue<Knot>s;
+    c.x=si;
+    c.y=sj;
+    c.z=sk;
+    c.step=0;
+    s.push(c);
+    while (!s.empty())
+    {
+        d=s.front();
+        s.pop();
+        c.step=d.step+1;
+        for (int i=0;i<6;i++)
+         {
+             c.x=d.x+f[0][i];
+             c.y=d.y+f[1][i];
+             c.z=d.z+f[2][i];
+             if (search1(c.x,c.y,c.z)&&!b[c.x][c.y][c.z]&&a[c.x][c.y][c.z]!='#')
+             {
+                 if (a[c.x][c.y][c.z]=='E')
+                 return c.step;
+                    b[c.x][c.y][c.z]=1;
+                    s.push(c);
+             }
+         }
+    }
+    return -1;
+}
+int main()
+{
+    int i,j,k;
+    int si,sj,sk;
+    while (cin>>L>>R>>C&&(L!=0||R!=0||C!=0))
+    {
+        memset(b,0,sizeof(b));
+        for (i=1;i<=L;i++)
+            for (j=1;j<=R;j++)
+              for (k=1;k<=C;k++)
+          {
+            cin>>a[i][j][k];
+            if (a[i][j][k]=='S')
+                {
+                    si=i;
+                    sj=j;
+                    sk=k;
+                }
+          }
+          flag=bfs(si,sj,sk);
+          if (flag==-1)
+            cout << "Trapped!" << endl;
+          else
+             cout << "Escaped in " << flag << " minute(s)." << endl;
+
+    }
+    return 0;
+}

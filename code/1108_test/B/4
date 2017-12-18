@@ -1,0 +1,65 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+#include <ctime>
+#include <cassert>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <map>
+#include <set>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <iomanip>
+#define maxn 10005
+using namespace std;
+int n,k;
+double a[maxn];
+int b[maxn];
+double mlen;
+double max(double a,double b)
+{
+    return a>b?a:b;
+}
+int getnum(__int64 x)
+{
+    int tot;
+    if(x==0) return 100000;
+    tot=0;
+    for(int i=1; i<=n; i++) tot+=b[i]/x;
+    return tot;
+}
+int main()
+{
+    scanf("%d%d",&n,&k);
+    __int64 sum;
+    mlen=-1;
+    for(int i=1; i<=n; i++)
+    {
+        scanf("%lf",&a[i]);
+        mlen=max(mlen,a[i]);
+        b[i]=(a[i]+0.005)*100;
+        sum+=b[i];
+    }
+    if(sum<k)
+    {
+        printf("0.00\n");
+        return 0;
+    }
+    __int64 left,right,mid;
+    left=0;
+    right=(int)((mlen+0.005)*100);
+    while(right-left>0)
+    {
+       // printf("%d %d\n",left,right);
+        mid=(left+right)/2+1;
+        if(getnum(mid)>=k)
+            left=mid;
+        else right=mid-1;
+    }
+    //printf("%d\n",mid);
+    printf("%.2lf\n",double(right)/100.0);
+    return 0;
+}
